@@ -120,7 +120,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>./SFML-2.5.1/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;./SFML-2.5.1/include;./Framework;./Scenes;./Global;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
@@ -152,27 +152,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Framework.cpp">
+    <ClCompile Include="Framework\Framework.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="InputMgr.cpp" />
+    <ClCompile Include="Framework\InputMgr.cpp" />
     <ClCompile Include="main.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="SceneGame.cpp" />
-    <ClCompile Include="SceneMgr.cpp" />
-    <ClCompile Include="SceneTitle.cpp" />
+    <ClCompile Include="Scenes\Scene.cpp" />
+    <ClCompile Include="Scenes\SceneGame.cpp" />
+    <ClCompile Include="Framework\SceneMgr.cpp" />
+    <ClCompile Include="Scenes\SceneTitle.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Defines.h" />
-    <ClInclude Include="Framework.h" />
-    <ClInclude Include="InputMgr.h" />
-    <ClInclude Include="Scene.h" />
-    <ClInclude Include="SceneGame.h" />
-    <ClInclude Include="SceneMgr.h" />
-    <ClInclude Include="SceneTitle.h" />
-    <ClInclude Include="Singleton.h" />
+    <ClInclude Include="Global\Defines.h" />
+    <ClInclude Include="Framework\Framework.h" />
+    <ClInclude Include="Framework\InputMgr.h" />
+    <ClInclude Include="Scenes\Scene.h" />
+    <ClInclude Include="Scenes\SceneGame.h" />
+    <ClInclude Include="Framework\SceneMgr.h" />
+    <ClInclude Include="Scenes\SceneTitle.h" />
+    <ClInclude Include="Global\Singleton.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
