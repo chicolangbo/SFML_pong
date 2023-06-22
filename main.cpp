@@ -3,6 +3,6 @@
 
 int main()
 {
-    Framework::Instance().Run();
+    FRAMEWORK.Run();
     return 0;
 }

@@ -7,7 +7,7 @@ class Framework : public Singleton<Framework>
 
 protected:
 	Framework() = default;
-	virtual ~Framework() = default;
+	virtual ~Framework() override = default;
 
 	sf::RenderWindow window;
 	sf::Clock clock;
@@ -21,3 +21,4 @@ public:
 	virtual void Run();
 };
 
+#define FRAMEWORK (Framework::Instance())
