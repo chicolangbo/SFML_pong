@@ -7,3 +7,10 @@ enum class SceneId
 	Game,
 	Count,
 };
+
+enum class ResourceTypes
+{
+	Texture,
+	Font,
+	SoundBuffer,
+};

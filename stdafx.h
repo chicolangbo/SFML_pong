@@ -4,6 +4,7 @@
 #include <vector>
 #include <list>
 #include <random>
+#include <map>
 #include <algorithm>
 
 #include <SFML/Graphics.hpp>

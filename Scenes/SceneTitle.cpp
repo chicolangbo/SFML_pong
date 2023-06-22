@@ -2,6 +2,7 @@
 #include "SceneTitle.h"
 #include "SceneMgr.h"
 #include "InputMgr.h"
+#include "ResourceMgr.h"
 
 SceneTitle::SceneTitle() : Scene(SceneId::Title)
 {
@@ -21,12 +22,14 @@ void SceneTitle::Release()
 void SceneTitle::Enter()
 {
 	Scene::Enter();
+	RESOURCE_MGR.Load(ResourceTypes::Texture, "graphics/Cream Unicorn Cookie.png");
 
 }
 
 void SceneTitle::Exit()
 {
 	Scene::Exit();
+	RESOURCE_MGR.Unload(ResourceTypes::Texture, "graphics/Cream Unicorn Cookie.png");
 
 }
 
@@ -43,4 +46,8 @@ void SceneTitle::Update(float dt)
 void SceneTitle::Draw(sf::RenderWindow& window)
 {
 	Scene::Draw(window);
+
+	sf::Sprite sprite;
+	sprite.setTexture(*RESOURCE_MGR.GetTexture("graphics/Cream Unicorn Cookie.png"));
+	window.draw(sprite);
 }

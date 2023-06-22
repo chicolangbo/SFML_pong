@@ -159,6 +159,7 @@
     <ClCompile Include="main.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="ResourceMgr.cpp" />
     <ClCompile Include="Scenes\Scene.cpp" />
     <ClCompile Include="Scenes\SceneGame.cpp" />
     <ClCompile Include="Framework\SceneMgr.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="Global\Defines.h" />
     <ClInclude Include="Framework\Framework.h" />
     <ClInclude Include="Framework\InputMgr.h" />
+    <ClInclude Include="ResourceMgr.h" />
     <ClInclude Include="Scenes\Scene.h" />
     <ClInclude Include="Scenes\SceneGame.h" />
     <ClInclude Include="Framework\SceneMgr.h" />
