@@ -11,4 +11,6 @@
 
 #include <windows.h>
 
+#include "Defines.h"
+
 // define, utils

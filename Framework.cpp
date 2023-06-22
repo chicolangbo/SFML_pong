@@ -1,30 +1,30 @@
 #include "stdafx.h"
 #include "Framework.h"
 #include "InputMgr.h"
+#include "SceneMgr.h"
 
 void Framework::Init(int width, int height, const char* title)
 {
 	window.create(sf::VideoMode(width, height), title);
+
+    SCENE_MGR.Init();
 }
 
 void Framework::Release()
 {
+    SCENE_MGR.Release();
+
 }
 
 void Framework::Update(float dt)
 {
-    if (INPUT_MGR.GetKeyDown(sf::Keyboard::A))
-    {
-        std::cout << "Down" << std::endl;
-    }
-    if (INPUT_MGR.GetKeyUp(sf::Keyboard::A))
-    {
-        std::cout << "Up" << std::endl;
-    }
+    SCENE_MGR.Update(dt);
+
 }
 
 void Framework::Draw()
 {
+    SCENE_MGR.Draw(window);
 
 }
 
