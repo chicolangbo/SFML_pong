@@ -15,4 +15,5 @@
 #include "Defines.h"
 #include "GameObject.h"
 #include "Utils.h"
+#include "SpriteGo.h"
 // define, utils

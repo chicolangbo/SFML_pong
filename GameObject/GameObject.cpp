@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "GameObject.h"
 
-GameObject::GameObject()
+GameObject::GameObject(const std::string n)
+	: name (n)
 {
 }
 

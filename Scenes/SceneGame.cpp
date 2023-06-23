@@ -3,6 +3,7 @@
 #include "SceneMgr.h"
 #include "InputMgr.h"
 #include "ResourceMgr.h"
+#include "GameObject.h"
 
 SceneGame::SceneGame() : Scene(SceneId::Game)
 {
@@ -10,27 +11,31 @@ SceneGame::SceneGame() : Scene(SceneId::Game)
 
 void SceneGame::Init()
 {
-	Scene::Init();
+	Release();
+
+	for (auto go : gameObjects)
+	{
+		go->Init();
+	}
 }
 
 void SceneGame::Release()
 {
-	Scene::Release();
-
+	for (auto go : gameObjects)
+	{
+		//go->Release();
+		delete go;
+	}
 }
 
 void SceneGame::Enter()
 {
 	Scene::Enter();
-	RESOURCE_MGR.Load(ResourceTypes::Texture, "graphics/Peppermint Cookie.png");
-
 }
 
 void SceneGame::Exit()
 {
 	Scene::Exit();
-	RESOURCE_MGR.Unload(ResourceTypes::Texture, "graphics/Peppermint Cookie.png");
-
 }
 
 void SceneGame::Update(float dt)
@@ -46,8 +51,5 @@ void SceneGame::Update(float dt)
 void SceneGame::Draw(sf::RenderWindow& window)
 {
 	Scene::Draw(window);
-	sf::Sprite sprite;
-	sprite.setTexture(*RESOURCE_MGR.GetTexture("graphics/Peppermint Cookie.png"));
-	window.draw(sprite);
 
 }

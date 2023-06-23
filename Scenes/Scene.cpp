@@ -72,25 +72,6 @@ void Scene::SortGos()
 		});
 }
 
-void Scene::Init()
-{
-	Release();		// 이미 세팅된 값이 있을지 모르니
-
-	for (auto go : gameObjects)
-	{
-		go->Init();
-	}
-}
-
-void Scene::Release()
-{
-	for (auto go : gameObjects)
-	{
-		//go->Release();
-		delete go;
-	}
-	gameObjects.clear();
-}
 
 void Scene::Enter()
 {

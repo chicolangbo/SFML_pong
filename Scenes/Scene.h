@@ -24,8 +24,8 @@ public:
 	void SortGos();
 
 
-	virtual void Init();
-	virtual void Release();
+	virtual void Init() = 0;
+	virtual void Release() {};
 
 	virtual void Enter();
 	virtual void Exit();
