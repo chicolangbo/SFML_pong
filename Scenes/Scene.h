@@ -1,14 +1,28 @@
 #pragma once
+
+class GameObject;
+
 class Scene
 {
 protected:
-	SceneId sceneId;
-
 	Scene(const Scene&) = delete;
 	Scene& operator=(const Scene&) = delete;
+
+	SceneId sceneId;
+
+	std::list<GameObject*> gameObjects;		// »ðÀÔ »èÁ¦ ºó¹ø
+
 public:
 	Scene(SceneId id = SceneId::None);
 	virtual ~Scene();
+
+	GameObject* FindGo(const std::string& name);
+	void FindGos(std::list<GameObject*>& list, const std::string& name);
+	bool Exist(GameObject* go);
+	void AddGo(GameObject* go);
+	void RemoveGo(GameObject* go);
+	void SortGos();
+
 
 	virtual void Init();
 	virtual void Release();

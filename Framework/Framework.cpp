@@ -52,5 +52,6 @@ void Framework::Run()
         Draw();
         window.display();
     }
+
     Release();
 }

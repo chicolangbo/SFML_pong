@@ -13,5 +13,6 @@
 #include <windows.h>
 
 #include "Defines.h"
-
+#include "GameObject.h"
+#include "Utils.h"
 // define, utils
