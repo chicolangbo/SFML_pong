@@ -3,7 +3,12 @@
 #include "InputMgr.h"
 #include "SceneMgr.h"
 
-void Framework::Init(int width, int height, const char* title)
+Framework::Framework(int w, int h, const std::string& t)
+    :screenWidth(w), screenHeight(h), title(t)
+{
+}
+
+void Framework::Init(int width, int height, const std::string& title)
 {
 	window.create(sf::VideoMode(width, height), title);
 
@@ -30,7 +35,7 @@ void Framework::Draw()
 
 void Framework::Run()
 {
-    Init(1280, 720, "SFML Works!");
+    Init(screenWidth, screenHeight, title);
     clock.restart();
     while (window.isOpen())
     {
@@ -54,4 +59,9 @@ void Framework::Run()
     }
 
     Release();
+}
+
+sf::Vector2f Framework::GetWindowSize()
+{
+    return sf::Vector2f(screenWidth, screenHeight);
 }

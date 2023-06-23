@@ -48,6 +48,9 @@
     <ClCompile Include="SpriteGo.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Global\Variables.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -87,6 +90,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="SpriteGo.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Global\Variables.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
