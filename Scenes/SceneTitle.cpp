@@ -31,6 +31,7 @@ void SceneTitle::Release()
 void SceneTitle::Enter()
 {
 	Scene::Enter();
+
 }
 
 void SceneTitle::Exit()

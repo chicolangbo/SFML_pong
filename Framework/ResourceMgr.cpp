@@ -71,6 +71,14 @@ void ResourceMgr::Load(ResourceTypes t, const std::string path)
     //mapTexture.insert(std::make_pair("ID", new sf::Texture()));
 }
 
+void ResourceMgr::Load(const std::vector<std::tuple<ResourceTypes, std::string>>& array)
+{
+    for (const auto& tuple : array)
+    {
+        Load(std::get<0>(tuple), std::get<1>(tuple));
+    }
+}
+
 void ResourceMgr::Unload(ResourceTypes t, const std::string id)
 {
     switch (t)
@@ -105,6 +113,14 @@ void ResourceMgr::Unload(ResourceTypes t, const std::string id)
         }
     }
         break;
+    }
+}
+
+void ResourceMgr::Unload(const std::vector<std::tuple<ResourceTypes, std::string>>& array)
+{
+    for (const auto& tuple : array)
+    {
+        Unload(std::get<0>(tuple), std::get<1>(tuple));
     }
 }
 

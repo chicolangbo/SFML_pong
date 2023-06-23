@@ -6,6 +6,7 @@
 #include <random>
 #include <map>
 #include <algorithm>
+#include <tuple>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>

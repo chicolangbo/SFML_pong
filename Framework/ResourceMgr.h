@@ -17,7 +17,11 @@ public:
 	void UnLoadAll();
 
 	void Load(ResourceTypes t, const std::string path);
+	void Load(const std::vector<std::tuple<ResourceTypes, std::string>>& array);
+
 	void Unload(ResourceTypes t, const std::string id);
+	void Unload(const std::vector<std::tuple<ResourceTypes, std::string>>& array);
+
 
 	sf::Texture* GetTexture(const std::string& id);
 	sf::Font* GetFont(const std::string& id);

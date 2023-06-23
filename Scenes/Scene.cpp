@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Scene.h"
 #include "GameObject.h"
+#include "ResourceMgr.h"
 
 Scene::Scene(SceneId id) : sceneId(id)
 {
@@ -75,16 +76,16 @@ void Scene::SortGos()
 
 void Scene::Enter()
 {
+	RESOURCE_MGR.Load(resources);
 	for (auto go : gameObjects)
 	{
 		go->Reset();
 	}
-
 }
 
 void Scene::Exit()
 {
-
+	RESOURCE_MGR.Unload(resources);
 }
 
 void Scene::Update(float dt)

@@ -10,6 +10,7 @@ protected:
 
 	SceneId sceneId;
 
+	std::vector<std::tuple<ResourceTypes, std::string>> resources;
 	std::list<GameObject*> gameObjects;		// »ğÀÔ »èÁ¦ ºó¹ø
 
 public:
