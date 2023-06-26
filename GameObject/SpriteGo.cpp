@@ -27,11 +27,16 @@ void SpriteGo::SetPosition(float x, float y)
 
 void SpriteGo::SetOrigin(Origins origin)
 {
-	Utils::SetOrigin(sprite, origin);
+	GameObject::SetOrigin(origin);
+	if (this->origin != Origins::CUSTOM)
+	{
+		Utils::SetOrigin(sprite, origin);
+	}
 }
 
 void SpriteGo::SetOrigin(float x, float y)
 {
+	GameObject::SetOrigin(x,y);
 	sprite.setOrigin(x, y);
 }
 

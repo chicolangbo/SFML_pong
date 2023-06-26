@@ -3,16 +3,16 @@
 #include "Scene.h"
 #include "SceneTitle.h"
 #include "SceneGame.h"
+#include "ScenePong.h"
 
 void SceneMgr::Init()
 {
-	if (scenes.empty())
+	if (!scenes.empty())
 	{
 		Release();
 	}
 
-	scenes.push_back(new SceneTitle());
-	scenes.push_back(new SceneGame());
+	scenes.push_back(new ScenePong());
 
 	for (auto scene : scenes)
 	{

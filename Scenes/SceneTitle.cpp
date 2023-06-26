@@ -4,14 +4,19 @@
 #include "InputMgr.h"
 #include "ResourceMgr.h"
 #include "SpriteGo.h"
+#include "Framework.h"
 
 SceneTitle::SceneTitle() : Scene(SceneId::Title)
 {
+	resources.push_back(std::make_tuple(ResourceTypes::Texture, "graphics/cloud.png"));
+	resources.push_back(std::make_tuple(ResourceTypes::Texture, "graphics/bee.png"));
 }
 
 void SceneTitle::Init()
 {
 	Release();
+
+	AddGo(new SpriteGo("Cloud"));
 
 	for (auto go : gameObjects)
 	{
@@ -32,6 +37,15 @@ void SceneTitle::Enter()
 {
 	Scene::Enter();
 
+	SpriteGo* findGo = (SpriteGo*)FindGo("Cloud");
+	findGo->sprite.setTexture(*RESOURCE_MGR.GetTexture("graphics/cloud.png"));
+
+	sf::Vector2f centerPos = FRAMEWORK.GetWindowSize();
+	centerPos.x *= 0.5f;
+	centerPos.y *= 0.5f;
+
+	findGo->SetPosition(centerPos);
+	findGo->SetOrigin(Origins::MC); // 사이즈 기준으로 잡히기 때문에 texture를 바꿀 때마다 setOrigin해줘야 함
 }
 
 void SceneTitle::Exit()

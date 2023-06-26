@@ -120,7 +120,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>./;./SFML-2.5.1/include;./Framework;./Scenes;./Global;./GameObject;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;./SFML-2.5.1/include;./Framework;./Scenes;./Global;./GameObject;./Pong;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
@@ -152,6 +152,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Pong\Ball.cpp" />
     <ClCompile Include="Framework\Framework.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
@@ -163,31 +164,46 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Framework\ResourceMgr.cpp" />
+    <ClCompile Include="Reflector.cpp" />
+    <ClCompile Include="Scenes\ScenePong.cpp" />
     <ClCompile Include="Scenes\Scene.cpp" />
-    <ClCompile Include="Scenes\SceneGame.cpp" />
+    <ClCompile Include="Scenes\SceneGame.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Framework\SceneMgr.cpp" />
-    <ClCompile Include="Scenes\SceneTitle.cpp" />
+    <ClCompile Include="Scenes\SceneTitle.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Global\Utils.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="SpriteGo.cpp" />
+    <ClCompile Include="GameObject\SpriteGo.cpp" />
     <ClCompile Include="Global\Variables.cpp" />
+    <ClCompile Include="GameObject\TextGo.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Pong\Ball.h" />
     <ClInclude Include="GameObject\GameObject.h" />
     <ClInclude Include="Global\Defines.h" />
     <ClInclude Include="Framework\Framework.h" />
     <ClInclude Include="Framework\InputMgr.h" />
     <ClInclude Include="Framework\ResourceMgr.h" />
+    <ClInclude Include="Reflector.h" />
+    <ClInclude Include="Scenes\ScenePong.h" />
     <ClInclude Include="Scenes\Scene.h" />
-    <ClInclude Include="Scenes\SceneGame.h" />
+    <ClInclude Include="Scenes\SceneGame.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Framework\SceneMgr.h" />
-    <ClInclude Include="Scenes\SceneTitle.h" />
+    <ClInclude Include="Scenes\SceneTitle.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Global\Singleton.h" />
-    <ClInclude Include="SpriteGo.h" />
-    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="GameObject\SpriteGo.h" />
+    <ClInclude Include="Global\stdafx.h" />
     <ClInclude Include="Global\Utils.h" />
     <ClInclude Include="Global\Variables.h" />
+    <ClInclude Include="GameObject\TextGo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

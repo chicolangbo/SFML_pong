@@ -25,5 +25,6 @@ enum class Origins	// ÇÇ¹þ
 	MR,
 	BL,
 	BC,
-	BR
+	BR,
+	CUSTOM
 };
