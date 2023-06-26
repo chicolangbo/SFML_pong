@@ -58,7 +58,7 @@ void Ball::Reset()
 
 void Ball::Update(float dt)
 {
-	currentPos += direction;  
+	currentPos += direction;
 	// currentPos += direction * speed * dt;  
 	// 속도 * 이전 프레임 기준 경과 시간 => 프레임 단위 이동 거리 누적
 	ball.setPosition(currentPos);

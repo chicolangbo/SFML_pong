@@ -5,6 +5,7 @@ class ScenePong :
     public Scene
 {
 private:
+	bool isAttatch;
 
 public:
 	ScenePong();

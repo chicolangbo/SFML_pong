@@ -9,7 +9,7 @@
 #include "Framework.h"
 
 ScenePong::ScenePong()
-	: Scene(SceneId::Title)
+	: Scene(SceneId::Title), isAttatch(true)
 {
 }
 
@@ -24,6 +24,8 @@ void ScenePong::Init()
 	{
 		go->Init();
 	}
+
+	Attatch();
 }
 
 void ScenePong::Release()
@@ -60,9 +62,12 @@ void ScenePong::Exit()
 
 void ScenePong::Update(float dt)
 {
-	Scene::Update(dt);
-	//Attatch();
+	if (INPUT_MGR.GetKey(sf::Keyboard::Key::Space))
+	{
+		Scene::Update(dt);
+	}
 	CheckCollide();
+
 }
 
 void ScenePong::Draw(sf::RenderWindow& window)
@@ -72,6 +77,7 @@ void ScenePong::Draw(sf::RenderWindow& window)
 
 void ScenePong::Attatch()
 {
+	isAttatch = true;
 	auto ballPos = (Ball*)FindGo("Ball");
 	auto reflectorPos = (Reflector*)FindGo("Reflector");
 
