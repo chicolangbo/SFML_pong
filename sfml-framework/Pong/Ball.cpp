@@ -3,7 +3,7 @@
 #include "Framework.h"
 
 Ball::Ball(const std::string n)
-	: GameObject(n), direction(0.3,-0.35)
+	: GameObject(n), direction(0.2,-0.35)
 {
 }
 

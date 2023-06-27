@@ -10,7 +10,6 @@ private:
 	int lifePoint;
 	int scorePoint;
 	int blockCount;
-	bool makeOnce;
 	std::list<Blocks*> blockPool; // * 블록 객체 메모리풀
 	std::list<Blocks*> blockActive; // * 활성화된 블록 객체
 
@@ -31,7 +30,6 @@ public:
 	void CheckCollide();
 	void MoveReflector(float dt);
 	void ScoreUpdate();
-
 	void makeBlock();
 };
 

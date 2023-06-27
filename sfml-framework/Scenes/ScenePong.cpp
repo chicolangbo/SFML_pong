@@ -11,7 +11,7 @@
 #include "Blocks.h"
 
 ScenePong::ScenePong()
-	: Scene(SceneId::Game), isStart(false), lifePoint(3), scorePoint(0), blockCount(5), makeOnce(true) // 객체화 하기 전에 초기화 해주는 게 바람직함
+	: Scene(SceneId::Game), isStart(false), lifePoint(3), scorePoint(0), blockCount(5) // 객체화 하기 전에 초기화 해주는 게 바람직함
 {
 	// 폰트 tuple 생성
 	// 로드, 언로드는 Scene에서 실행됨
@@ -76,6 +76,11 @@ void ScenePong::Release()
 		blockActive.clear();
 	}
 
+	if (lifePoint <= 0)
+	{
+		std::cout << "init" << std::endl;
+	}
+
 }
 
 void ScenePong::Enter()
@@ -115,7 +120,6 @@ void ScenePong::Enter()
 	lifeText->text.setCharacterSize(60);
 	lifeText->SetPosition(pad2.left + pad2.width + 20.f, 20.f);
 
-
 	// 스크린 사이즈
 	sf::Vector2f windowSize = FRAMEWORK.GetWindowSize();
 	sf::Vector2f centerPos = { windowSize.x / 2.f, windowSize.y / 2.f };
@@ -134,12 +138,8 @@ void ScenePong::Enter()
 	ballGo->SetOrigin(Origins::MC);
 	ballGo->SetPosition(reflectorGo->reflector.getPosition());
 
-	// 블록 테스트 코드
-	//Blocks* blocksGo = (Blocks*)FindGo("Blocks");
-	//blocksGo->block.setSize(sf::Vector2f(100.f, 20.f));
-	//blocksGo->block.setFillColor(sf::Color::Yellow);
-	//blocksGo->SetOrigin(Origins::MC);
-	//blocksGo->SetPosition(Utils::RandomRange(0.f, windowSize.x), Utils::RandomRange(0.f, centerPos.y));
+	// 블록
+	makeBlock();
 }
 
 void ScenePong::Exit()
@@ -153,11 +153,6 @@ void ScenePong::Update(float dt)
 	auto reflectorPos = (Reflector*)FindGo("Reflector");
 
 	Scene::Update(dt);
-
-	if (makeOnce)
-	{
-		makeBlock();
-	}
 
 	MoveReflector(dt);
 	ScoreUpdate();
@@ -297,7 +292,7 @@ void ScenePong::ScoreUpdate()
 
 void ScenePong::makeBlock()
 {
-	makeOnce = false;
+	//makeOnce = false;
 	for (int i = 0; i < blockCount; i++)
 	{
 		// blockPool에서 pop_front() & blockActive에 push_back
