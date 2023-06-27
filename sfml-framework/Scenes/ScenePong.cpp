@@ -11,7 +11,7 @@
 #include "Blocks.h"
 
 ScenePong::ScenePong()
-	: Scene(SceneId::Game), isStart(false), lifePoint(3), scorePoint(0) // 객체화 하기 전에 초기화 해주는 게 바람직함
+	: Scene(SceneId::Game), isStart(false), lifePoint(3), scorePoint(0), blockCount(5), makeOnce(true) // 객체화 하기 전에 초기화 해주는 게 바람직함
 {
 	// 폰트 tuple 생성
 	// 로드, 언로드는 Scene에서 실행됨
@@ -22,10 +22,17 @@ void ScenePong::Init()
 {
 	Release();
 
-	// 생성자에서 해주면 안됨 => 이유???
+	for (int i = 0; i < 20; ++i)
+	{
+		Blocks* newGo = new Blocks("Blocks");
+		newGo->SetActive(false);
+		blockPool.push_back(newGo);
+	}
+
+	// 생성자에서 해주면 안됨 => Release 먼저 하면서 gameObjects에서 삭제되기 때문
 	AddGo(new Ball("Ball"));
 	AddGo(new Reflector("Reflector"));
-	AddGo(new Blocks("Blocks"));
+	//AddGo(new Blocks("Blocks"));
 	AddGo(new TextGo("Score", "fonts/DS-DIGI.ttf"));
 	AddGo(new TextGo("ScorePoint", "fonts/DS-DIGI.ttf"));
 	AddGo(new TextGo("Life", "fonts/DS-DIGI.ttf"));
@@ -48,6 +55,27 @@ void ScenePong::Release()
 		//go->Release();
 		delete go;
 	}
+
+	if (blockPool.begin() != blockPool.end())
+	{
+		for (auto& blockP : blockPool)
+		{
+			delete blockP;
+			blockP = nullptr;
+		}
+		blockPool.clear();
+	}
+
+	if (blockActive.begin() != blockActive.end())
+	{
+		for (auto& blockA : blockActive)
+		{
+			delete blockA;
+			blockA = nullptr;
+		}
+		blockActive.clear();
+	}
+
 }
 
 void ScenePong::Enter()
@@ -106,12 +134,12 @@ void ScenePong::Enter()
 	ballGo->SetOrigin(Origins::MC);
 	ballGo->SetPosition(reflectorGo->reflector.getPosition());
 
-	// 블록
-	Blocks* blocksGo = (Blocks*)FindGo("Blocks");
-	blocksGo->block.setSize(sf::Vector2f(100.f, 20.f));
-	blocksGo->block.setFillColor(sf::Color::Yellow);
-	blocksGo->SetOrigin(Origins::MC);
-	blocksGo->SetPosition(Utils::RandomRange(0.f, windowSize.x), Utils::RandomRange(0.f, centerPos.y));
+	// 블록 테스트 코드
+	//Blocks* blocksGo = (Blocks*)FindGo("Blocks");
+	//blocksGo->block.setSize(sf::Vector2f(100.f, 20.f));
+	//blocksGo->block.setFillColor(sf::Color::Yellow);
+	//blocksGo->SetOrigin(Origins::MC);
+	//blocksGo->SetPosition(Utils::RandomRange(0.f, windowSize.x), Utils::RandomRange(0.f, centerPos.y));
 }
 
 void ScenePong::Exit()
@@ -125,6 +153,12 @@ void ScenePong::Update(float dt)
 	auto reflectorPos = (Reflector*)FindGo("Reflector");
 
 	Scene::Update(dt);
+
+	if (makeOnce)
+	{
+		makeBlock();
+	}
+
 	MoveReflector(dt);
 	ScoreUpdate();
 	CheckCollide();
@@ -138,6 +172,13 @@ void ScenePong::Update(float dt)
 void ScenePong::Draw(sf::RenderWindow& window)
 {
 	Scene::Draw(window);
+	for (auto blockA : blockActive)
+	{
+		if (blockA->GetActive())
+		{
+			blockA->Draw(window);
+		}
+	}
 }
 
 void ScenePong::Attatch()
@@ -157,20 +198,37 @@ void ScenePong::CheckCollide()
 	sf::FloatRect ballSize = ballPos->ball.getGlobalBounds();
 	auto reflectorPos = (Reflector*)FindGo("Reflector");
 	sf::FloatRect refSize = reflectorPos->reflector.getGlobalBounds();
+
+	// 블록
+	for (auto blockGo : blockActive)
+	{
+		sf::FloatRect blockSize = blockGo->block.getGlobalBounds();
+
+		if (!blockGo->GetActive())
+		{
+			continue;
+		}
+
+		else if(ballSize.intersects(blockSize))
+		{
+			ballPos->direction.y = -ballPos->direction.y;
+			blockGo->SetActive(false);
+			scorePoint++;
+		}
+	}
+
+	// 벽 충돌
 	if (ballSize.left+ballSize.width >= screenSize.x)
 	{
 		ballPos->direction.x = -ballPos->direction.x;
-		scorePoint++;
 	}
 	if (ballSize.left <= 0.f)
 	{
 		ballPos->direction.x = -ballPos->direction.x;
-		scorePoint++;
 	}
 	if (ballSize.top <= 0.f)
 	{
 		ballPos->direction.y = -ballPos->direction.y;
-		scorePoint++;
 	}
 
 	// 바닥 충돌
@@ -230,5 +288,26 @@ void ScenePong::ScoreUpdate()
 	{
 		lifePoint = 3;
 		this->scorePoint = 0;
+		for (auto blockGo : blockActive)
+		{
+			blockGo->SetActive(true);
+		}
+	}
+}
+
+void ScenePong::makeBlock()
+{
+	makeOnce = false;
+	for (int i = 0; i < blockCount; i++)
+	{
+		// blockPool에서 pop_front() & blockActive에 push_back
+		Blocks* blockTemp = blockPool.front();
+		blockPool.pop_front();
+		blockActive.push_back(blockTemp);
+		blockTemp->SetActive(true);
+		blockTemp->block.setSize(sf::Vector2f(100.f, 20.f));
+		blockTemp->block.setFillColor(sf::Color::Yellow);
+		blockTemp->SetOrigin(Origins::ML);
+		blockTemp->SetPosition(sf::Vector2f(i * (100.f) + 130.f * (i + 1), 200.f));
 	}
 }
