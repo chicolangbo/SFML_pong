@@ -30,7 +30,7 @@
     <ClCompile Include="Scenes\Scene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Scenes\SceneTitle.cpp">
+    <ClCompile Include="Title\SceneTitle.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Scenes\SceneGame.cpp">
@@ -86,7 +86,7 @@
     <ClInclude Include="Global\Defines.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Scenes\SceneTitle.h">
+    <ClInclude Include="Title\SceneTitle.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Scenes\SceneGame.h">

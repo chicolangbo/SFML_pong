@@ -10,7 +10,7 @@
 #include "TextGo.h"
 
 ScenePong::ScenePong()
-	: Scene(SceneId::Title), isStart(false), lifePoint(3), scorePoint(0)
+	: Scene(SceneId::Game), isStart(false), lifePoint(3), scorePoint(0) // 객체화 하기 전에 초기화 해주는 게 바람직함
 {
 	// 폰트 tuple 생성
 	// 로드, 언로드는 Scene에서 실행됨
@@ -149,7 +149,6 @@ void ScenePong::CheckCollide()
 	sf::FloatRect ballSize = ballPos->ball.getGlobalBounds();
 	auto reflectorPos = (Reflector*)FindGo("Reflector");
 	sf::FloatRect refSize = reflectorPos->reflector.getGlobalBounds();
-
 	if (ballSize.left+ballSize.width >= screenSize.x)
 	{
 		ballPos->direction.x = -ballPos->direction.x;
@@ -209,7 +208,7 @@ void ScenePong::MoveReflector(float dt)
 	}
 }
 
-void ScenePong::ScoreUpdate() // 보류
+void ScenePong::ScoreUpdate()
 {
 	std::string scoreNum = std::to_string(this->scorePoint);
 	TextGo* scorePoint = (TextGo*)FindGo("ScorePoint");

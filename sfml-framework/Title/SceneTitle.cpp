@@ -5,18 +5,19 @@
 #include "ResourceMgr.h"
 #include "SpriteGo.h"
 #include "Framework.h"
+#include "TextGo.h"
 
 SceneTitle::SceneTitle() : Scene(SceneId::Title)
 {
-	resources.push_back(std::make_tuple(ResourceTypes::Texture, "graphics/cloud.png"));
-	resources.push_back(std::make_tuple(ResourceTypes::Texture, "graphics/bee.png"));
+	// 이 클래스 안에서 생성, 소멸되기 때문에 매번 만들어줘야 함
+	resources.push_back(std::make_tuple(ResourceTypes::Font, "fonts/DS-DIGI.ttf"));
 }
 
 void SceneTitle::Init()
 {
 	Release();
 
-	AddGo(new SpriteGo("Cloud"));
+	AddGo(new TextGo("Title", "fonts/DS-DIGI.ttf"));
 
 	for (auto go : gameObjects)
 	{
@@ -37,15 +38,15 @@ void SceneTitle::Enter()
 {
 	Scene::Enter();
 
-	SpriteGo* findGo = (SpriteGo*)FindGo("Cloud");
-	findGo->sprite.setTexture(*RESOURCE_MGR.GetTexture("graphics/cloud.png"));
-
 	sf::Vector2f centerPos = FRAMEWORK.GetWindowSize();
-	centerPos.x *= 0.5f;
-	centerPos.y *= 0.5f;
 
-	findGo->SetPosition(centerPos);
-	findGo->SetOrigin(Origins::MC); // 사이즈 기준으로 잡히기 때문에 texture를 바꿀 때마다 setOrigin해줘야 함
+	TextGo* titleGo = (TextGo*)FindGo("Title");
+	titleGo->text.setFont(*RESOURCE_MGR.GetFont("fonts/DS-DIGI.ttf"));
+	titleGo->text.setString("START TO PRESS ENTER");
+	titleGo->text.setFillColor(sf::Color::White);
+	titleGo->text.setCharacterSize(100);
+	titleGo->SetOrigin(Origins::MC);
+	titleGo->SetPosition(centerPos / 2.f);
 }
 
 void SceneTitle::Exit()
@@ -57,7 +58,7 @@ void SceneTitle::Update(float dt)
 {
 	Scene::Update(dt);
 
-	if (INPUT_MGR.GetKeyDown(sf::Keyboard::Escape))
+	if (INPUT_MGR.GetKeyDown(sf::Keyboard::Enter))
 	{
 		SCENE_MGR.ChangeScene(SceneId::Game);
 	}
