@@ -1,5 +1,6 @@
 #pragma once
 #include "Scene.h"
+#include "Blocks.h"
 
 class ScenePong :
     public Scene
@@ -8,6 +9,7 @@ private:
 	bool isStart;
 	int lifePoint;
 	int scorePoint;
+	/*std::list<Blocks*> blockPool;*/ // * 블록 객체 메모리풀
 
 public:
 	ScenePong();

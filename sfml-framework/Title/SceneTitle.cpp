@@ -38,7 +38,7 @@ void SceneTitle::Enter()
 {
 	Scene::Enter();
 
-	sf::Vector2f centerPos = FRAMEWORK.GetWindowSize();
+	sf::Vector2f centerPos = FRAMEWORK.GetWindowSize(); // centerPos = 1280,720 이라서 아직 중앙X
 
 	TextGo* titleGo = (TextGo*)FindGo("Title");
 	titleGo->text.setFont(*RESOURCE_MGR.GetFont("fonts/DS-DIGI.ttf"));

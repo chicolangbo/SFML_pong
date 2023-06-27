@@ -8,6 +8,7 @@
 #include "ResourceMgr.h"
 #include "Framework.h"
 #include "TextGo.h"
+#include "Blocks.h"
 
 ScenePong::ScenePong()
 	: Scene(SceneId::Game), isStart(false), lifePoint(3), scorePoint(0) // 객체화 하기 전에 초기화 해주는 게 바람직함
@@ -24,6 +25,7 @@ void ScenePong::Init()
 	// 생성자에서 해주면 안됨 => 이유???
 	AddGo(new Ball("Ball"));
 	AddGo(new Reflector("Reflector"));
+	AddGo(new Blocks("Blocks"));
 	AddGo(new TextGo("Score", "fonts/DS-DIGI.ttf"));
 	AddGo(new TextGo("ScorePoint", "fonts/DS-DIGI.ttf"));
 	AddGo(new TextGo("Life", "fonts/DS-DIGI.ttf"));
@@ -85,25 +87,31 @@ void ScenePong::Enter()
 	lifeText->text.setCharacterSize(60);
 	lifeText->SetPosition(pad2.left + pad2.width + 20.f, 20.f);
 
-	// 볼, 리플렉터
-	auto ballGo = (Ball*)FindGo("Ball");
-	auto reflectorGo = (Reflector*)FindGo("Reflector");
 
-	// 로컬좌표
-	reflectorGo->reflector.setSize(sf::Vector2f(200.f, 20.f));
-	reflectorGo->reflector.setFillColor(sf::Color::Blue);
-	reflectorGo->SetOrigin(Origins::MC);
-
-	ballGo->ball.setRadius(10.f);
-	ballGo->ball.setFillColor(sf::Color::Red);
-	ballGo->SetOrigin(Origins::MC);
-
-	// 월드좌표
+	// 스크린 사이즈
 	sf::Vector2f windowSize = FRAMEWORK.GetWindowSize();
 	sf::Vector2f centerPos = { windowSize.x / 2.f, windowSize.y / 2.f };
 
+	// 리플렉터
+	auto reflectorGo = (Reflector*)FindGo("Reflector");
+	reflectorGo->reflector.setSize(sf::Vector2f(100.f, 20.f));
+	reflectorGo->reflector.setFillColor(sf::Color::Blue);
+	reflectorGo->SetOrigin(Origins::MC);
 	reflectorGo->SetPosition(centerPos.x, centerPos.y + 300.f);
+
+	// 볼
+	auto ballGo = (Ball*)FindGo("Ball");
+	ballGo->ball.setRadius(10.f);
+	ballGo->ball.setFillColor(sf::Color::Red);
+	ballGo->SetOrigin(Origins::MC);
 	ballGo->SetPosition(reflectorGo->reflector.getPosition());
+
+	// 블록
+	Blocks* blocksGo = (Blocks*)FindGo("Blocks");
+	blocksGo->block.setSize(sf::Vector2f(100.f, 20.f));
+	blocksGo->block.setFillColor(sf::Color::Yellow);
+	blocksGo->SetOrigin(Origins::MC);
+	blocksGo->SetPosition(Utils::RandomRange(0.f, windowSize.x), Utils::RandomRange(0.f, centerPos.y));
 }
 
 void ScenePong::Exit()

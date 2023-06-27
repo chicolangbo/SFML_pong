@@ -152,6 +152,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Blocks.cpp" />
     <ClCompile Include="Pong\Ball.cpp" />
     <ClCompile Include="Framework\Framework.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -182,6 +183,7 @@
     <ClCompile Include="GameObject\TextGo.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Blocks.h" />
     <ClInclude Include="Pong\Ball.h" />
     <ClInclude Include="GameObject\GameObject.h" />
     <ClInclude Include="Global\Defines.h" />
